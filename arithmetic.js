@@ -19,8 +19,27 @@ function getArguments(numberOfArguments) {
 
 function calculate(operator, arguments, numberOfArguments) {
     let ans = arguments[0];
+    
 
-    for (let i = 1; i < numberOfArguments; i++) {
+    switch(operator) {
+        case '*':
+            ans = arguments.reduce(
+                (previousValue, currentValue) => previousValue * currentValue, 1);
+            break;
+        case '+':
+            ans = arguments.reduce(
+                (previousValue,currentValue) => previousValue + currentValue, 0);
+            break;
+        case '-':
+            ans = arguments.reduce(
+                (previousValue,currentValue) => previousValue - currentValue, arguments[0]);
+            break;
+        case '/':
+            ans = arguments.slice(1).filter(x => x !== 0).reduce((previousValue,currentValue) => previousValue/currentValue, arguments[0]);
+            break;
+    }
+
+    /*for (let i = 1; i < numberOfArguments; i++) {
         switch(operator) {
             case '*':
                 ans *= arguments[i];
@@ -35,7 +54,7 @@ function calculate(operator, arguments, numberOfArguments) {
                 ans /= arguments[i];
                 break;
         }
-    }
+    }*/
     return ans;
 }
 
