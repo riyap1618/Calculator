@@ -12,7 +12,7 @@ function getIntegerInput(prompt) {
     do {
         num = +getStringInput(prompt);
     } 
-    while (isNaN(num));
+    while (isNaN(num) && console.log('Invalid number!'));
     return num;
 }
 

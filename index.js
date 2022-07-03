@@ -19,12 +19,19 @@ function getCalculationMode(){
  
 welcome();
 while (true) {
-  const calculationMode = getCalculationMode();
-  if (calculationMode === ARITHMETIC_MODE) {
-    arithmetic.performOneArithmeticCalculation();
-  } else if (calculationMode === VOWEL_COUNTING_MODE) {
-    vowelCount.performOneVowelCountingCalculation();
-  }
+    let calculationMode = 0;
+    let i = 0;
+    do {
+        if (i > 0) {
+            console.log('Invalid mode!');
+        }
+        calculationMode = getCalculationMode();
+        i += 1;
+    }
+    while (calculationMode != 1 && calculationMode != 2);
+    if (calculationMode === ARITHMETIC_MODE) {
+        arithmetic.performOneArithmeticCalculation();
+    } else if (calculationMode === VOWEL_COUNTING_MODE) {
+        vowelCount.performOneVowelCountingCalculation();
+    }
 }
-
-
