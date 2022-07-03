@@ -37,33 +37,24 @@ function calculate(operator, arguments, numberOfArguments) {
         case '/':
             ans = arguments.slice(1).filter(x => x !== 0).reduce((previousValue,currentValue) => previousValue/currentValue, arguments[0]);
             break;
-    }
 
-    /*for (let i = 1; i < numberOfArguments; i++) {
-        switch(operator) {
-            case '*':
-                ans *= arguments[i];
-                break;
-            case '+':
-                ans += arguments[i];
-                break;
-            case '-':
-                ans -= arguments[i];
-                break;
-            case '/':
-                ans /= arguments[i];
-                break;
-        }
-    }*/
+        default: 
+            throw new Error (`The operator ${operator} cannot be used.`)
+    }
     return ans;
 }
 
 function performOneArithmeticCalculation(){
+    try{
     const operator = getOperator();
     const numberOfArguments = getNumberofArguments(operator);
     const arguments = getArguments(numberOfArguments);
     const ans = calculate(operator, arguments, numberOfArguments);
     console.log(`The answer is ${ans}.`);
+    }
+    catch (e) {
+        console.log(`${e.message}`);
+    }
 }
 
 exports.performOneArithmeticCalculation = performOneArithmeticCalculation;
