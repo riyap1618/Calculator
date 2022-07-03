@@ -5,31 +5,34 @@ console.log('Welcome to the calculator!');
 console.log('Please enter the operator:');
 const operator = readline.prompt();
 
-console.log('Please enter the first number:');
-const response1 = readline.prompt();
-const firstNum = +response1;
+console.log('How many numbers do you want to ' + operator + '?');
+const number = readline.prompt();
+const numberOfArguments = +number;
 
-console.log('Please enter the second number:');
-const response2 = readline.prompt();
-const secondNum = +response2;
+let arguments = new Array(numberOfArguments);
 
-let ans = 0;
+for (let i = 0; i < numberOfArguments; i++) {
+    console.log('Please enter number ' + (i+1) + ':');
+    arguments[i] = +readline.prompt();
+}
 
-switch(operator) {
-case '*':
-    ans = firstNum * secondNum;
-    break;
-case '+':
-    ans = firstNum + secondNum;
-    break;
-case '-':
-    ans = firstNum - secondNum;
-    break;
-case '/':
-    ans = firstNum / secondNum;
-    break;
-default:
-    break;
+let ans = arguments[0];
+
+for (let i = 1; i < numberOfArguments; i++) {
+    switch(operator) {
+        case '*':
+            ans *= arguments[i];
+            break;
+        case '+':
+            ans += arguments[i];
+            break;
+        case '-':
+            ans -= arguments[i];
+            break;
+        case '/':
+            ans /= arguments[i];
+            break;
+    }
 }
 
 console.log('The answer is ' + ans + '.');
