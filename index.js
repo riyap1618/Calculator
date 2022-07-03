@@ -14,17 +14,22 @@ const response2 = readline.prompt();
 const secondNum = +response2;
 
 let ans = 0;
-if (operator === '*') {
+
+switch(operator) {
+case '*':
     ans = firstNum * secondNum;
-}
-else if (operator === '+') {
+    break;
+case '+':
     ans = firstNum + secondNum;
-}
-else if (operator === '-') {
+    break;
+case '-':
     ans = firstNum - secondNum;
-}
-else if (operator === '/') {
+    break;
+case '/':
     ans = firstNum / secondNum;
+    break;
+default:
+    break;
 }
 
 console.log('The answer is ' + ans + '.');
