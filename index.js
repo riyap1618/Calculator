@@ -1,38 +1,67 @@
 const readline = require('readline-sync');
 
-console.log('Welcome to the calculator!');
-
-console.log('Please enter the operator:');
-const operator = readline.prompt();
-
-console.log('How many numbers do you want to ' + operator + '?');
-const number = readline.prompt();
-const numberOfArguments = +number;
-
-let arguments = new Array(numberOfArguments);
-
-for (let i = 0; i < numberOfArguments; i++) {
-    console.log('Please enter number ' + (i+1) + ':');
-    arguments[i] = +readline.prompt();
+function welcome(){
+    console.log('Welcome to the calculator!');
 }
 
-let ans = arguments[0];
+function getStringInput(prompt) {
+    console.log(prompt);
+    return readline.prompt();
+}
 
-for (let i = 1; i < numberOfArguments; i++) {
-    switch(operator) {
-        case '*':
-            ans *= arguments[i];
-            break;
-        case '+':
-            ans += arguments[i];
-            break;
-        case '-':
-            ans -= arguments[i];
-            break;
-        case '/':
-            ans /= arguments[i];
-            break;
+function getIntegerInput(prompt) {
+    let num;
+    do {
+        num = +getStringInput(prompt);
+    } 
+    while (isNaN(num));
+    return num;
+}
+
+function getOperator() {
+    return getStringInput('Please enter the operator:');
+}
+
+function getNumberofArguments(operator) {
+    return getIntegerInput('How many number do you want to ' + operator + '?');
+}
+
+function getArguments(numberOfArguments) {
+    let arguments = new Array(numberOfArguments);
+
+    for (let i = 0; i < numberOfArguments; i++) {
+        arguments[i] = getIntegerInput('Please enter number ' + (i+1) + ':');
     }
+    return arguments;
 }
 
-console.log('The answer is ' + ans + '.');
+function calculate(operator, arguments, numberOfArguments) {
+    let ans = arguments[0];
+
+    for (let i = 1; i < numberOfArguments; i++) {
+        switch(operator) {
+            case '*':
+                ans *= arguments[i];
+                break;
+            case '+':
+                ans += arguments[i];
+                break;
+            case '-':
+                ans -= arguments[i];
+                break;
+            case '/':
+                ans /= arguments[i];
+                break;
+        }
+    }
+    return ans;
+}
+
+welcome();
+while (true) {
+    const operator = getOperator();
+    const numberOfArguments = getNumberofArguments(operator);
+    const arguments = getArguments(numberOfArguments);
+    const ans = calculate(operator, arguments, numberOfArguments);
+    console.log('The answer is ' + ans + '.');
+}
